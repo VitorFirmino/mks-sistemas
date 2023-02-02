@@ -1,18 +1,28 @@
-import './globals.css'
+"use client";
+
+import StyledComponentsRegistry from "@/lib/registry";
+import { store } from "@/store/store";
+import GlobalStyle from "@/styles/globalStyles";
+import { Provider } from "react-redux";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      {/*
-        <head /> will contain the components returned by the nearest parent
-        head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
+    <html lang="pt-br">
       <head />
-      <body>{children}</body>
+      <body>
+        <Provider store={store}>
+          <StyledComponentsRegistry>
+            <div>
+              <GlobalStyle />
+              {children}
+            </div>
+          </StyledComponentsRegistry>
+        </Provider>
+      </body>
     </html>
-  )
+  );
 }
